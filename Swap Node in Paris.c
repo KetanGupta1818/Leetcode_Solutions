@@ -16,3 +16,13 @@ struct ListNode* swapPairs(struct ListNode* head){
 }
 //----------------------------------------------------------------------
 //With Recursion
+struct ListNode* swapPairs(struct ListNode* head){
+    if(head==NULL || head->next==NULL) return head;
+    struct ListNode *second = head->next;
+    struct ListNode *reversed = swapPairs(second->next);
+    second->next = head;
+    head->next = reversed;
+    reversed = second;
+    return reversed;
+    
+}
