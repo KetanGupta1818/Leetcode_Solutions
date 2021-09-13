@@ -95,3 +95,25 @@ class Solution {
         return true;
     }
 }
+//Second method: Here only one Hashtable is used.
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        HashSet<String> hs = new HashSet<String>();
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]=='.') continue;
+                String row_str = new String("row"+i+"["+board[i][j]+"]");
+                String col_str = new String("column"+j+"["+board[i][j]+"]");
+                String block_str = new String("block"+i/3+j/3+"["+board[i][j]+"]");
+                if(hs.contains(row_str)) return false;
+                else hs.add(row_str);
+                if(hs.contains(col_str)) return false;
+                else hs.add(col_str);
+                if(hs.contains(block_str)) return false;
+                else hs.add(block_str);
+                
+            }
+        }
+        return true;
+    }
+}
