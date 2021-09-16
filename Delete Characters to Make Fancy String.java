@@ -22,3 +22,7 @@ class Solution {
 }
 //Runtime: 2254 ms, faster than 5.01% of Java online submissions for Delete Characters to Make Fancy String.
 //Memory Usage: 83.6 MB, less than 47.47% of Java online submissions for Delete Characters to Make Fancy String.
+If we use a new StringBuffer string and append the values and end, then the speed of the program increases,
+Runtime: 38 ms, faster than 67.40% of Java online submissions for Delete Characters to Make Fancy String.
+Memory Usage: 40 MB, less than 89.90% of Java online submissions for Delete Characters to Make Fancy String.
+From 2254ms to just 38ms..............
