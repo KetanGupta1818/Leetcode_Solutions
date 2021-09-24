@@ -16,11 +16,8 @@ class Solution {
         return str.toString();
     }
     public boolean isPalindrome(String s, int n){
-        int second;
-        if(n%2==1) second=n/2+1;
-        else second = n/2;
-        for(int i=0;i<n/2;i++){
-            if(s.charAt(i)!=s.charAt(second+i)) return false;
+        for(int i=0;i<n;i++){
+            if(s.charAt(i)!=s.charAt(n-i-1)) return false;
         }
         return true;
     }
