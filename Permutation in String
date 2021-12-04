@@ -1,0 +1,23 @@
+class Solution {
+        public static boolean checkInclusion(String s1, String s2) {
+        int[] frequencyArray = new int[26];
+        s1.chars().forEach(ch ->frequencyArray[ch-97]++);
+        if(s1.length()>s2.length()) return false;
+        String startingString = s2.substring(0,s1.length());
+        startingString.chars().forEach(ch -> frequencyArray[ch-97]--);
+        int slowPointer = 0;
+        if(checkForAllZeroArray(frequencyArray)) return true;
+        for(int i=s1.length();i<s2.length();i++){
+            char nextChar = s2.charAt(i);
+            frequencyArray[nextChar-97]--;
+            char prevChar = s2.charAt(slowPointer++);
+            frequencyArray[prevChar-97]++;
+            if(checkForAllZeroArray(frequencyArray)) return true;
+        }
+        return false;
+    }
+    public static boolean checkForAllZeroArray(int[] frequencyArray){
+        for(int i: frequencyArray) if(i!=0) return false;
+        return true;
+    }
+}
