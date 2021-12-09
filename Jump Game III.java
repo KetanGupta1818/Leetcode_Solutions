@@ -16,3 +16,14 @@ class Solution {
         return false;
     }
 }
+
+//Recursion: 
+class Solution {
+    public boolean canReach(int[] arr, int start) {
+        if(start>=arr.length || start<0 || arr[start]==-1) return false;
+        if(arr[start] == 0) return true;
+        int val = arr[start];
+        arr[start] = -1;
+        return canReach(arr,v + start) || canReach(arr,start-v); 
+    }
+}
