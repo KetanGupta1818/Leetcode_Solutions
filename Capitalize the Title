@@ -1,0 +1,18 @@
+class Solution {
+    public String capitalizeTitle(String title) {
+        String[] arr = title.split(" ");
+        StringBuffer ans = new StringBuffer();
+        for(String word: arr){
+            StringBuffer cur = new StringBuffer();
+            if(word.length()<=2) cur = new StringBuffer(word.toLowerCase());
+            else{
+                String b = word.toLowerCase();
+                cur.append(Character.toUpperCase(b.charAt(0)));
+                //System.out.println(Character.toUpperCase(b.charAt(0)));
+                cur.append(b.substring(1));
+            }
+            ans.append(cur).append(" ");
+        }
+        return ans.substring(0,ans.length()-1);
+    }
+}
