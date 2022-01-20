@@ -1,0 +1,22 @@
+class Solution {
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        boolean[] visited = new boolean[n];
+        List<List<Integer>> list = new ArrayList<>();
+        for(int i=0;i<n;i++) list.add(new ArrayList<>());
+        for(int[] edge: edges){
+            list.get(edge[0]).add(edge[1]);
+            list.get(edge[1]).add(edge[0]);
+        }
+        visited[source] = true;
+        dfs(source,visited,list);
+        return visited[destination];
+    }
+    public void dfs(int s,boolean[] visited, List<List<Integer>> list){
+        for(int av: list.get(s)){
+            if(!visited[av]){
+                visited[av] = true;
+                dfs(av,visited,list);
+            }
+        }
+    }
+}
