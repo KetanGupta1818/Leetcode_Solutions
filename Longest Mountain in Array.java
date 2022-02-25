@@ -14,3 +14,24 @@ class Solution {
         return max;
     }
 }
+//Two pointer solution. Let the base pointer be at the start of mountain. Traverse the array as if we are climbing the mountain and stop when we find a 
+possible peak. After finding the possible peak we need to traverse the array as if we are returning from the peak. when this is done calculate the maximum 
+value. :->
+
+class Solution {
+    public int longestMountain(int[] arr) {
+        int base=0,n=arr.length,max=0;
+        while(base<n){
+            int end=base;
+            if(end<n-1 && arr[end]<arr[end+1]){
+                while(end<n-1 && arr[end]<arr[end+1]) end++;
+                if(end<n-1 && arr[end]>arr[end+1]) {
+                    while(end<n-1 && arr[end]>arr[end+1]) end++;
+                    max=Math.max(max,end-base+1);
+                }
+            }
+         
+            base = Math.max(end, base + 1);
+        }return max;
+    }
+}
