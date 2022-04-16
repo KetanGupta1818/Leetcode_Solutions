@@ -33,3 +33,36 @@ class Solution {
         inorder(root.left);
     }
 }
+//Solution 3 Morris Inorder Traversal
+class Solution {
+    int totalSum = 0;
+    public TreeNode convertBST(TreeNode root) {
+        morrisInorderTraversal(root);
+        return root;
+    }
+    public void morrisInorderTraversal(TreeNode root){
+        TreeNode cur = root;
+        while(cur!=null){
+            if(cur.right==null){
+                totalSum += cur.val;
+                cur.val = totalSum;
+                cur = cur.left;
+            }
+            else{
+                TreeNode succ = cur.right;
+                while(succ.left!=null && succ.left!=cur) 
+                    succ = succ.left;
+                if(succ.left==null){
+                    succ.left = cur;
+                    cur = cur.right;
+                }
+                else{
+                    succ.left = null;
+                    totalSum += cur.val;
+                    cur.val = totalSum;
+                    cur = cur.left;
+                }
+            }
+        }
+    }
+}
