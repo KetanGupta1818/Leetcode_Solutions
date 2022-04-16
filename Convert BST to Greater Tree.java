@@ -18,3 +18,18 @@ class Solution {
         inorder(root.right);
     }
 }
+//Solution 2
+class Solution {
+    int totalSum = 0;
+    public TreeNode convertBST(TreeNode root) {
+        inorder(root);
+        return root;
+    }
+    public void inorder(TreeNode root){
+        if(root==null) return;
+        inorder(root.right);
+        totalSum+=root.val;
+        root.val=totalSum;
+        inorder(root.left);
+    }
+}
