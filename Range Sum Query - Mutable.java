@@ -54,9 +54,39 @@ class NumArray {
     }
 }
 
-/**
- * Your NumArray object will be instantiated and called as such:
- * NumArray obj = new NumArray(nums);
- * obj.update(index,val);
- * int param_2 = obj.sumRange(left,right);
- */
+//Binary Indexed Tree
+class NumArray {
+    int[] BIT;
+    int n;
+    public NumArray(int[] nums) {
+        n = nums.length;
+        BIT = new int[n+1];
+        for(int i=0;i<n;i++){
+            updateUtil(i,nums[i]);
+        }
+    }
+    
+    public void update(int index, int val) {
+        updateUtil(index, val-sumRange(index,index));
+    }
+    public void updateUtil(int index, int dif){
+        index++;
+        while(index<=n){
+            BIT[index]+=dif;
+            index += (index & -index);
+        }
+    }
+    
+    public int sumRange(int left, int right) {
+        int p1 = right+1, p2 = left, sum=0;
+        while(p1!=0){
+            sum += BIT[p1];
+            p1 -= (p1 & (-p1));
+        }
+        while(p2!=0){
+            sum -= BIT[p2];
+            p2 -= (p2 & (-p2));
+        }
+        return sum;
+    }
+}
