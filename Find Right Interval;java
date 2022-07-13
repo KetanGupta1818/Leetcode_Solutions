@@ -1,0 +1,52 @@
+class Solution {
+    public int[] findRightInterval(int[][] intervals) {
+        int  n = intervals.length;
+        Map<Point,Integer> map = new HashMap<>();
+        for(int i=0;i<n;i++){
+            map.put(new Point(intervals[i][0],intervals[i][1]),i);
+        }
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
+        int[] ans = new int[n];
+        for(int[] interval: intervals){
+            int pos = bs(intervals,interval[1]);
+            if(pos == n) ans[map.get(new Point(interval[0],interval[1]))] = -1;
+            else ans[map.get(new Point(interval[0],interval[1]))] = map.get(new Point(intervals[pos][0],intervals[pos][1]));
+        }
+        return ans;
+    }
+    private int bs(int[][] intervals, int target){
+        int lo=0,hi=intervals.length-1;
+        while(lo<=hi){
+            int m = (lo+hi)/2;
+            if(intervals[m][0]>=target) hi = m-1;
+            else lo=m+1;
+        }
+        return hi+1;
+    }
+}
+class Point{
+    final int x;
+    final int y;
+
+    Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getDistance(Point other){
+        return Math.abs(this.x-other.x)+Math.abs(this.y-other.y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Point)) return false;
+        Point point = (Point) o;
+        return x == point.x && y == point.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return x * 201337  + y;
+    }
+}
