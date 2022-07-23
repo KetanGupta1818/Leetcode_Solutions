@@ -1,0 +1,14 @@
+class Solution {
+    public long zeroFilledSubarray(int[] nums) {
+        long answer = 0L;
+        for(int i=0;i< nums.length;i++){
+            if(nums[i]!=0) continue;
+            int j = i;
+            while(j< nums.length && nums[j]==0) j++;
+            long size = j-i;
+            i=j;
+            answer += (size*(size+1))/2;
+        }
+        return answer;
+    }
+}
