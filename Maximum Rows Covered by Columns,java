@@ -1,0 +1,47 @@
+//Use of Strings to represent bits. Instead of integers
+class Solution {
+    private int targetColumns;
+    private int[] masks;
+    private int max = 0;
+    public int maximumRows(int[][] mat, int targetColumns) {
+        int rows = mat.length;
+        this.masks = new int[rows];
+        for(int r=0;r<rows;r++) masks[r] = fromArray(mat[r]);
+        this.targetColumns = targetColumns;
+        rec("",0,mat[0].length);
+        return max;
+    }
+    private int fromArray(int[] arr){
+        int shift = arr.length-1;
+        int num = 0;
+        for(int i: arr) num += i<<shift--;
+        return num;
+    }
+    private void rec(String currentColumnsMask, int numberOfColumns, int totalColumns){
+        if(numberOfColumns==totalColumns){
+            checkForValidity(currentColumnsMask);
+            return;
+        }
+        rec(currentColumnsMask+"0",numberOfColumns+1,totalColumns);
+        rec(currentColumnsMask+"1",numberOfColumns+1,totalColumns);
+    }
+    private void checkForValidity(String columnMask){
+        if(numberOfSetBits(columnMask)!=targetColumns) return;
+        int cnt = 0;
+        m: for(int r: masks){
+            int index = columnMask.length()-1;
+            while(r>0){
+                if((r&1)==1 && columnMask.charAt(index)=='0') continue m;
+                r=r>>1;
+                index--;
+            }
+            cnt++;
+        }
+        max= Math.max(max,cnt);
+    }
+    private int numberOfSetBits(String num){
+        int cnt = 0;
+        for(int i=0;i<num.length();i++) if(num.charAt(i)=='1') cnt++;
+        return cnt;
+    }
+}
