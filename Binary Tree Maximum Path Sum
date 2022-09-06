@@ -1,0 +1,10 @@
+class Solution {
+    public int maxPathSum(TreeNode root) {
+        if(root==null) return -100000;
+        return Math.max(maxPathSum(root.left),Math.max(maxPathSum(root.right),downSum(root.left)+downSum(root.right)+root.val));
+    }
+    private int downSum(TreeNode root){
+        if(root==null) return 0;
+        return Math.max(0,root.val+(Math.max(0,Math.max(downSum(root.left),downSum(root.right)))));
+    }
+}
