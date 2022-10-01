@@ -1,24 +1,14 @@
 class Solution {
-     public boolean equalFrequency(String word) {
-        int maxIndex = -1;
-        int max = 0;
-        int[] map = new int[26];
-        for(int i=0;i<word.length();i++) map[word.charAt(i)-'a']++;
-        for(int i=0;i<26;i++){
-            if(map[i]==0) continue;
-            map[i]--;
-            if(f(map)) return true;
-            map[i]++;
-        }
-        return false;
+    public int xorAllNums(int[] nums1, int[] nums2) {
+        int n1 = nums1.length,n2=nums2.length;
+        if(n1%2==0 && n2%2==0) return 0;
+        if(n1%2==1 && n2%2==1) return x(nums1)^x(nums2);
+        if(n1%2==1) return x(nums2);
+        return x(nums1);
     }
-    private boolean f(int[] map){
-        int prev = -1;
-        for(int m: map){
-            if(m == 0 || m==prev) continue;
-            if(prev == -1) prev = m;
-            else return false;
-        }
-        return true;
+    private int x(int[] nums){
+        int xor = 0;
+        for(int n: nums) xor = xor^n;
+        return xor;
     }
 }
